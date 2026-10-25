@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "seed": 20261025,
+  "quick": false,
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "scope": "single-process mathematical/interface validation; XOR is a separate earlier baseline",
+  "does_not_establish": [
+    "originality",
+    "distributed training speed",
+    "end-to-end current-protocol convergence",
+    "energy savings",
+    "measured peak memory",
+    "formal floating-point verification"
+  ],
+  "compressed_contract": {
+    "simulated_nodes": 4,
+    "feature_dim_per_node": 16,
+    "output_dim": 128,
+    "shared_rank": 4,
+    "cases": 100,
+    "arbitrary_update_checks": 2000,
+    "bound_failures": 0,
+    "max_actual_loss_minus_upper_bound": -6.561809584582079e-8,
+    "max_relative_base_gradient_error": 1.2226137565530948e-15,
+    "constructed_near_boundary_candidates_rejected_by_old_rule": 100,
+    "gate_crossing_candidates_accepted": 100,
+    "accepted_crossings_with_actual_descent": 100,
+    "response_payload_only": {
+      "dtype": "float64",
+      "dense_bytes_per_node": 16384,
+      "compact_matrix_and_tail_bytes_per_node": 520,
+      "proposal_summary_numbers_per_node_per_sample": 6,
+      "excluded": [
+        "basis/coordinator state",
+        "contract construction queries",
+        "metadata",
+        "committed features",
+        "batch and sequence multipliers"
+      ]
+    }
+  },
+  "multilayer_remainder": {
+    "checks": 1600,
+    "failures": 0,
+    "max_actual_remainder_minus_bound": 1.9925821806775346e-15
+  },
+  "strict_parallel_baseline": {
+    "checks": 1000,
+    "failures": 0,
+    "max_actual_loss_change_minus_local_bound": -1.7579339405601052e-13
+  },
+  "zeroth_order_xor_baseline": {
+    "parameters": 33,
+    "simulated_nodes": 8,
+    "block_size": 8,
+    "rounds": 1600,
+    "initial_loss": 0.6554283706074631,
+    "final_loss": 0.0002734389417471515,
+    "sign_accuracy": 1,
+    "max_replica_difference": 0,
+    "predictions": [
+      0.9873933925762343,
+      -0.9721236878000051,
+      -0.9774342546364582,
+      0.9727551227281811
+    ],
+    "scope": "single-process, disk-backed zeroth-order baseline; known mechanisms"
+  },
+  "all_property_checks_passed": true
+}
