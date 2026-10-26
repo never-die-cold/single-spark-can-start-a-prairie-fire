@@ -1,0 +1,1437 @@
+{
+  "scope": "exploratory same-task comparisons; never combine best seeds from different settings into one claimed success rate",
+  "headline_setting": "replay-reference-2026-10-25.json",
+  "novelty_status": "candidate combination; academic originality not established",
+  "cost_scope": "logical wire bytes including prescribed metadata; not electricity, money or measured transport",
+  "global_conclusion": "some same-target communication wins; no tested shared setting makes every method and seed succeed",
+  "assessments": [
+    {
+      "source": "replay-reference-2026-10-25.json",
+      "config": {
+        "max_rounds": 1000,
+        "local_steps": 16,
+        "learning_rate": 0.08,
+        "fusion_learning_rate": 0.04,
+        "fusion_interval": 2,
+        "initial_rank": 1,
+        "refresh_period": 4,
+        "max_attempts": 8,
+        "target_loss": 0.01
+      },
+      "all_safety_checks_passed": true,
+      "all_targets_reached": false,
+      "cases": [
+        {
+          "seed": 17,
+          "methods": {
+            "backprop": {
+              "target_reached": true,
+              "final_loss": 0.009982085040533944,
+              "rounds": 143,
+              "total_logical_bytes": 7690624,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1296,
+                  1296,
+                  1296,
+                  1296
+                ],
+                "coordinator_max_observed_bytes": 2992,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 143,
+                "branch_forward_samples": 109872,
+                "branch_vjp_samples_including_forward": 109824,
+                "fusion_forward_samples": 30888,
+                "fusion_line_search_trials": 71,
+                "fusion_updates": 71,
+                "fusion_vjp_samples_including_forward": 28308,
+                "proposal_attempts": 143
+              }
+            },
+            "replay_endpoint": {
+              "target_reached": true,
+              "final_loss": 0.009997911152570102,
+              "rounds": 141,
+              "total_logical_bytes": 1221556,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  3552,
+                  3552,
+                  3552,
+                  3552
+                ],
+                "coordinator_max_observed_bytes": 4144,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 141,
+                "boundary_setup_sample_nodes": 6768,
+                "branch_forward_samples": 117792,
+                "branch_vjp_samples_including_forward": 108288,
+                "capsule_forward_samples": 226032,
+                "capsule_vjp_samples_including_forward": 108288,
+                "committed_prefix_node_steps": 9024,
+                "fusion_forward_samples": 3384,
+                "fusion_line_search_trials": 70,
+                "fusion_updates": 70,
+                "fusion_vjp_samples_including_forward": 840,
+                "local_step_size_reductions": 244,
+                "proposal_attempts": 141,
+                "proposed_node_steps": 9024,
+                "selector_combinations": 141,
+                "selector_projection_samples": 6768,
+                "selector_suffix_forward_samples": 1692
+              }
+            },
+            "replay_select": {
+              "target_reached": true,
+              "final_loss": 0.009997911152570102,
+              "rounds": 141,
+              "total_logical_bytes": 1221556,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  4128,
+                  4128,
+                  4128,
+                  4128
+                ],
+                "coordinator_max_observed_bytes": 4144,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 141,
+                "boundary_setup_sample_nodes": 6768,
+                "branch_forward_samples": 117792,
+                "branch_vjp_samples_including_forward": 108288,
+                "capsule_forward_samples": 226032,
+                "capsule_vjp_samples_including_forward": 108288,
+                "committed_prefix_node_steps": 9024,
+                "fusion_forward_samples": 3384,
+                "fusion_line_search_trials": 70,
+                "fusion_updates": 70,
+                "fusion_vjp_samples_including_forward": 840,
+                "local_step_size_reductions": 244,
+                "proposal_attempts": 141,
+                "proposed_node_steps": 9024,
+                "selector_combinations": 141,
+                "selector_projection_samples": 6768,
+                "selector_suffix_forward_samples": 1692
+              }
+            },
+            "compressed": {
+              "target_reached": true,
+              "final_loss": 0.009979671892511113,
+              "rounds": 200,
+              "total_logical_bytes": 1463296,
+              "dense_response_oracle_samples": 1620,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1968,
+                  1968,
+                  1968,
+                  1968
+                ],
+                "coordinator_max_observed_bytes": 17488,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 200,
+                "anchor_rebuilds": 135,
+                "branch_forward_samples": 283656,
+                "branch_vjp_samples_including_forward": 264192,
+                "contract_installations": 135,
+                "dense_response_oracle_samples": 1620,
+                "fusion_forward_samples": 4788,
+                "fusion_line_search_trials": 99,
+                "fusion_updates": 99,
+                "fusion_vjp_samples_including_forward": 1188,
+                "joint_bound_sample_evaluations": 4128,
+                "local_objective_sample_evaluations": 283608,
+                "local_step_size_reductions": 242,
+                "proposal_attempts": 344,
+                "rejected_proposals": 144,
+                "step_size_reductions": 109,
+                "summary_sample_nodes": 16512
+              }
+            }
+          },
+          "same_target_byte_savings": {
+            "backprop": 0.8411629537473162,
+            "compressed": 0.16520239240727785,
+            "replay_endpoint": 0.0
+          }
+        },
+        {
+          "seed": 31,
+          "methods": {
+            "backprop": {
+              "target_reached": false,
+              "final_loss": 0.016551452566623878,
+              "rounds": 1000,
+              "total_logical_bytes": 112630144,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1296,
+                  1296,
+                  1296,
+                  1296
+                ],
+                "coordinator_max_observed_bytes": 2992,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 988,
+                "branch_forward_samples": 1609008,
+                "branch_vjp_samples_including_forward": 1608960,
+                "fusion_forward_samples": 439392,
+                "fusion_line_search_trials": 500,
+                "fusion_updates": 500,
+                "fusion_vjp_samples_including_forward": 408240,
+                "proposal_attempts": 2095,
+                "rejected_proposals": 1107
+              }
+            },
+            "replay_endpoint": {
+              "target_reached": false,
+              "final_loss": 0.015606462928678552,
+              "rounds": 1000,
+              "total_logical_bytes": 8616572,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  3552,
+                  3552,
+                  3552,
+                  3552
+                ],
+                "coordinator_max_observed_bytes": 9136,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 999,
+                "boundary_setup_sample_nodes": 48000,
+                "branch_forward_samples": 1223952,
+                "branch_vjp_samples_including_forward": 768000,
+                "capsule_forward_samples": 1991904,
+                "capsule_vjp_samples_including_forward": 768000,
+                "committed_prefix_node_steps": 50000,
+                "fusion_forward_samples": 24000,
+                "fusion_line_search_trials": 500,
+                "fusion_updates": 500,
+                "fusion_vjp_samples_including_forward": 6000,
+                "joint_endpoint_conflicts": 356,
+                "local_step_size_reductions": 34229,
+                "proposal_attempts": 1000,
+                "proposed_node_steps": 64000,
+                "rejected_proposals": 1,
+                "selector_combinations": 2843,
+                "selector_projection_samples": 62928,
+                "selector_suffix_forward_samples": 34116
+              }
+            },
+            "replay_select": {
+              "target_reached": false,
+              "final_loss": 0.014005498382229711,
+              "rounds": 1000,
+              "total_logical_bytes": 10060540,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  4392,
+                  4392,
+                  4392,
+                  4392
+                ],
+                "coordinator_max_observed_bytes": 19888,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 999,
+                "boundary_setup_sample_nodes": 48000,
+                "branch_forward_samples": 1213776,
+                "branch_vjp_samples_including_forward": 789024,
+                "capsule_forward_samples": 2002752,
+                "capsule_vjp_samples_including_forward": 789024,
+                "committed_prefix_node_steps": 49592,
+                "conflict_menu_requests": 389,
+                "fusion_forward_samples": 24000,
+                "fusion_line_search_trials": 500,
+                "fusion_updates": 500,
+                "fusion_vjp_samples_including_forward": 6000,
+                "joint_endpoint_conflicts": 389,
+                "local_step_size_reductions": 30916,
+                "proposal_attempts": 1000,
+                "proposed_node_steps": 64000,
+                "rejected_proposals": 1,
+                "replayed_node_steps": 1752,
+                "selector_combinations": 9690,
+                "selector_projection_samples": 103788,
+                "selector_suffix_forward_samples": 116280
+              }
+            },
+            "compressed": {
+              "target_reached": false,
+              "final_loss": 0.01929339065713975,
+              "rounds": 1000,
+              "total_logical_bytes": 20028288,
+              "dense_response_oracle_samples": 12000,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1968,
+                  1968,
+                  1968,
+                  1968
+                ],
+                "coordinator_max_observed_bytes": 17488,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 257,
+                "anchor_rebuilds": 1000,
+                "branch_forward_samples": 6341184,
+                "branch_vjp_samples_including_forward": 5968128,
+                "contract_installations": 1000,
+                "dense_response_oracle_samples": 12000,
+                "fusion_forward_samples": 15096,
+                "fusion_line_search_trials": 500,
+                "fusion_updates": 500,
+                "fusion_vjp_samples_including_forward": 6000,
+                "joint_bound_sample_evaluations": 93252,
+                "local_objective_sample_evaluations": 6341136,
+                "proposal_attempts": 7771,
+                "rejected_proposals": 7514,
+                "step_size_reductions": 7014,
+                "summary_sample_nodes": 373008
+              }
+            }
+          },
+          "same_target_byte_savings": {
+            "backprop": null,
+            "compressed": null,
+            "replay_endpoint": null
+          }
+        },
+        {
+          "seed": 47,
+          "methods": {
+            "backprop": {
+              "target_reached": true,
+              "final_loss": 0.009998275533356887,
+              "rounds": 812,
+              "total_logical_bytes": 45483904,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1296,
+                  1296,
+                  1296,
+                  1296
+                ],
+                "coordinator_max_observed_bytes": 2992,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 812,
+                "branch_forward_samples": 649776,
+                "branch_vjp_samples_including_forward": 649728,
+                "fusion_forward_samples": 182340,
+                "fusion_line_search_trials": 406,
+                "fusion_updates": 406,
+                "fusion_vjp_samples_including_forward": 167304,
+                "proposal_attempts": 846,
+                "rejected_proposals": 34
+              }
+            },
+            "replay_endpoint": {
+              "target_reached": true,
+              "final_loss": 0.009982225629847997,
+              "rounds": 492,
+              "total_logical_bytes": 4242864,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  3552,
+                  3552,
+                  3552,
+                  3552
+                ],
+                "coordinator_max_observed_bytes": 9136,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 492,
+                "boundary_setup_sample_nodes": 23616,
+                "branch_forward_samples": 456864,
+                "branch_vjp_samples_including_forward": 377856,
+                "capsule_forward_samples": 834672,
+                "capsule_vjp_samples_including_forward": 377856,
+                "committed_prefix_node_steps": 29520,
+                "fusion_forward_samples": 11820,
+                "fusion_line_search_trials": 246,
+                "fusion_updates": 246,
+                "fusion_vjp_samples_including_forward": 2952,
+                "joint_endpoint_conflicts": 57,
+                "local_step_size_reductions": 4624,
+                "proposal_attempts": 492,
+                "proposed_node_steps": 31488,
+                "selector_combinations": 820,
+                "selector_projection_samples": 26340,
+                "selector_suffix_forward_samples": 9840
+              }
+            },
+            "replay_select": {
+              "target_reached": true,
+              "final_loss": 0.009989589504992517,
+              "rounds": 494,
+              "total_logical_bytes": 4505080,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  4392,
+                  4392,
+                  4392,
+                  4392
+                ],
+                "coordinator_max_observed_bytes": 19888,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 494,
+                "boundary_setup_sample_nodes": 23712,
+                "branch_forward_samples": 462036,
+                "branch_vjp_samples_including_forward": 382464,
+                "capsule_forward_samples": 844452,
+                "capsule_vjp_samples_including_forward": 382464,
+                "committed_prefix_node_steps": 28880,
+                "conflict_menu_requests": 66,
+                "fusion_forward_samples": 11868,
+                "fusion_line_search_trials": 247,
+                "fusion_updates": 247,
+                "fusion_vjp_samples_including_forward": 2964,
+                "joint_endpoint_conflicts": 66,
+                "local_step_size_reductions": 4549,
+                "proposal_attempts": 494,
+                "proposed_node_steps": 31616,
+                "replayed_node_steps": 256,
+                "selector_combinations": 1901,
+                "selector_projection_samples": 33216,
+                "selector_suffix_forward_samples": 22812
+              }
+            },
+            "compressed": {
+              "target_reached": false,
+              "final_loss": 0.07602308208186213,
+              "rounds": 1000,
+              "total_logical_bytes": 20179072,
+              "dense_response_oracle_samples": 12000,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1968,
+                  1968,
+                  1968,
+                  1968
+                ],
+                "coordinator_max_observed_bytes": 17488,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 277,
+                "anchor_rebuilds": 1000,
+                "branch_forward_samples": 6385248,
+                "branch_vjp_samples_including_forward": 6009600,
+                "contract_installations": 1000,
+                "dense_response_oracle_samples": 12000,
+                "fusion_forward_samples": 15816,
+                "fusion_line_search_trials": 540,
+                "fusion_updates": 500,
+                "fusion_vjp_samples_including_forward": 6000,
+                "joint_bound_sample_evaluations": 93900,
+                "local_objective_sample_evaluations": 6385200,
+                "proposal_attempts": 7825,
+                "rejected_proposals": 7548,
+                "step_size_reductions": 7048,
+                "summary_sample_nodes": 375600
+              }
+            }
+          },
+          "same_target_byte_savings": {
+            "backprop": 0.9009522137765483,
+            "compressed": null,
+            "replay_endpoint": -0.061801650960294774
+          }
+        }
+      ]
+    },
+    {
+      "source": "replay-calibrated-2026-10-25.json",
+      "config": {
+        "max_rounds": 1000,
+        "local_steps": 16,
+        "learning_rate": 0.5,
+        "fusion_learning_rate": 0.15,
+        "fusion_interval": 2,
+        "initial_rank": 1,
+        "refresh_period": 4,
+        "max_attempts": 8,
+        "target_loss": 0.01
+      },
+      "all_safety_checks_passed": true,
+      "all_targets_reached": false,
+      "cases": [
+        {
+          "seed": 17,
+          "methods": {
+            "backprop": {
+              "target_reached": true,
+              "final_loss": 0.009983242191585959,
+              "rounds": 29,
+              "total_logical_bytes": 1561984,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1296,
+                  1296,
+                  1296,
+                  1296
+                ],
+                "coordinator_max_observed_bytes": 2992,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 29,
+                "branch_forward_samples": 22320,
+                "branch_vjp_samples_including_forward": 22272,
+                "fusion_forward_samples": 6264,
+                "fusion_line_search_trials": 14,
+                "fusion_updates": 14,
+                "fusion_vjp_samples_including_forward": 5736,
+                "proposal_attempts": 29
+              }
+            },
+            "replay_endpoint": {
+              "target_reached": true,
+              "final_loss": 0.009526644996411843,
+              "rounds": 34,
+              "total_logical_bytes": 298568,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  3552,
+                  3552,
+                  3552,
+                  3552
+                ],
+                "coordinator_max_observed_bytes": 9136,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 34,
+                "boundary_setup_sample_nodes": 1632,
+                "branch_forward_samples": 27864,
+                "branch_vjp_samples_including_forward": 26112,
+                "capsule_forward_samples": 53928,
+                "capsule_vjp_samples_including_forward": 26112,
+                "committed_prefix_node_steps": 2016,
+                "fusion_forward_samples": 828,
+                "fusion_line_search_trials": 17,
+                "fusion_updates": 17,
+                "fusion_vjp_samples_including_forward": 204,
+                "joint_endpoint_conflicts": 5,
+                "local_step_size_reductions": 6,
+                "proposal_attempts": 34,
+                "proposed_node_steps": 2176,
+                "selector_combinations": 59,
+                "selector_projection_samples": 1872,
+                "selector_suffix_forward_samples": 708
+              }
+            },
+            "replay_select": {
+              "target_reached": true,
+              "final_loss": 0.009479096793720287,
+              "rounds": 34,
+              "total_logical_bytes": 309704,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  4392,
+                  4392,
+                  4392,
+                  4392
+                ],
+                "coordinator_max_observed_bytes": 19888,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 34,
+                "boundary_setup_sample_nodes": 1632,
+                "branch_forward_samples": 28020,
+                "branch_vjp_samples_including_forward": 26244,
+                "capsule_forward_samples": 54216,
+                "capsule_vjp_samples_including_forward": 26244,
+                "committed_prefix_node_steps": 2059,
+                "conflict_menu_requests": 3,
+                "fusion_forward_samples": 828,
+                "fusion_line_search_trials": 17,
+                "fusion_updates": 17,
+                "fusion_vjp_samples_including_forward": 204,
+                "joint_endpoint_conflicts": 3,
+                "local_step_size_reductions": 3,
+                "proposal_attempts": 34,
+                "proposed_node_steps": 2176,
+                "replayed_node_steps": 11,
+                "selector_combinations": 111,
+                "selector_projection_samples": 2064,
+                "selector_suffix_forward_samples": 1332
+              }
+            },
+            "compressed": {
+              "target_reached": true,
+              "final_loss": 0.009975128216837112,
+              "rounds": 225,
+              "total_logical_bytes": 4386560,
+              "dense_response_oracle_samples": 2700,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1968,
+                  1968,
+                  1968,
+                  1968
+                ],
+                "coordinator_max_observed_bytes": 17488,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 116,
+                "anchor_rebuilds": 225,
+                "branch_forward_samples": 1347684,
+                "branch_vjp_samples_including_forward": 1265664,
+                "contract_installations": 225,
+                "dense_response_oracle_samples": 2700,
+                "fusion_forward_samples": 4092,
+                "fusion_line_search_trials": 112,
+                "fusion_updates": 112,
+                "fusion_vjp_samples_including_forward": 1344,
+                "joint_bound_sample_evaluations": 19776,
+                "local_objective_sample_evaluations": 1347636,
+                "local_step_size_reductions": 239,
+                "proposal_attempts": 1648,
+                "rejected_proposals": 1532,
+                "step_size_reductions": 1420,
+                "summary_sample_nodes": 79104
+              }
+            }
+          },
+          "same_target_byte_savings": {
+            "backprop": 0.8017239613209867,
+            "compressed": 0.9293970674058943,
+            "replay_endpoint": -0.03729803595830772
+          }
+        },
+        {
+          "seed": 31,
+          "methods": {
+            "backprop": {
+              "target_reached": true,
+              "final_loss": 0.009968422629840915,
+              "rounds": 426,
+              "total_logical_bytes": 46827904,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1296,
+                  1296,
+                  1296,
+                  1296
+                ],
+                "coordinator_max_observed_bytes": 2992,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 426,
+                "branch_forward_samples": 668976,
+                "branch_vjp_samples_including_forward": 668928,
+                "fusion_forward_samples": 182808,
+                "fusion_line_search_trials": 213,
+                "fusion_updates": 213,
+                "fusion_vjp_samples_including_forward": 169788,
+                "proposal_attempts": 871,
+                "rejected_proposals": 445
+              }
+            },
+            "replay_endpoint": {
+              "target_reached": false,
+              "final_loss": 0.1039688367805932,
+              "rounds": 1000,
+              "total_logical_bytes": 6172972,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  3552,
+                  3552,
+                  3552,
+                  3552
+                ],
+                "coordinator_max_observed_bytes": 9136,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 3,
+                "boundary_setup_sample_nodes": 48000,
+                "branch_forward_samples": 816084,
+                "branch_vjp_samples_including_forward": 768000,
+                "capsule_forward_samples": 1584036,
+                "capsule_vjp_samples_including_forward": 768000,
+                "committed_prefix_node_steps": 192,
+                "fusion_forward_samples": 47328,
+                "fusion_line_search_trials": 3440,
+                "fusion_updates": 80,
+                "fusion_vjp_samples_including_forward": 6000,
+                "joint_endpoint_conflicts": 997,
+                "local_step_size_reductions": 3,
+                "proposal_attempts": 1000,
+                "proposed_node_steps": 64000,
+                "rejected_proposals": 997,
+                "selector_combinations": 4988,
+                "selector_projection_samples": 95856,
+                "selector_suffix_forward_samples": 59856
+              }
+            },
+            "replay_select": {
+              "target_reached": false,
+              "final_loss": 0.1039688367805932,
+              "rounds": 1000,
+              "total_logical_bytes": 9873836,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  4128,
+                  4128,
+                  4128,
+                  4128
+                ],
+                "coordinator_max_observed_bytes": 19888,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 3,
+                "boundary_setup_sample_nodes": 48000,
+                "branch_forward_samples": 816084,
+                "branch_vjp_samples_including_forward": 768000,
+                "capsule_forward_samples": 1584036,
+                "capsule_vjp_samples_including_forward": 768000,
+                "committed_prefix_node_steps": 192,
+                "conflict_menu_requests": 997,
+                "fusion_forward_samples": 47328,
+                "fusion_line_search_trials": 3440,
+                "fusion_updates": 80,
+                "fusion_vjp_samples_including_forward": 6000,
+                "joint_endpoint_conflicts": 997,
+                "local_step_size_reductions": 3,
+                "proposal_attempts": 1000,
+                "proposed_node_steps": 64000,
+                "rejected_proposals": 997,
+                "selector_combinations": 14958,
+                "selector_projection_samples": 191568,
+                "selector_suffix_forward_samples": 179496
+              }
+            },
+            "compressed": {
+              "target_reached": false,
+              "final_loss": 0.01370635767027089,
+              "rounds": 1000,
+              "total_logical_bytes": 20086912,
+              "dense_response_oracle_samples": 12000,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1968,
+                  1968,
+                  1968,
+                  1968
+                ],
+                "coordinator_max_observed_bytes": 17488,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 32,
+                "anchor_rebuilds": 1000,
+                "branch_forward_samples": 6531648,
+                "branch_vjp_samples_including_forward": 6120960,
+                "contract_installations": 1000,
+                "dense_response_oracle_samples": 12000,
+                "fusion_forward_samples": 12396,
+                "fusion_line_search_trials": 500,
+                "fusion_updates": 500,
+                "fusion_vjp_samples_including_forward": 6000,
+                "joint_bound_sample_evaluations": 95640,
+                "local_objective_sample_evaluations": 6531600,
+                "local_step_size_reductions": 2340,
+                "proposal_attempts": 7970,
+                "rejected_proposals": 7938,
+                "step_size_reductions": 7438,
+                "summary_sample_nodes": 382560
+              }
+            }
+          },
+          "same_target_byte_savings": {
+            "backprop": null,
+            "compressed": null,
+            "replay_endpoint": null
+          }
+        },
+        {
+          "seed": 47,
+          "methods": {
+            "backprop": {
+              "target_reached": true,
+              "final_loss": 0.009997574796457525,
+              "rounds": 86,
+              "total_logical_bytes": 6722944,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1296,
+                  1296,
+                  1296,
+                  1296
+                ],
+                "coordinator_max_observed_bytes": 2992,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 86,
+                "branch_forward_samples": 96048,
+                "branch_vjp_samples_including_forward": 96000,
+                "fusion_forward_samples": 26520,
+                "fusion_line_search_trials": 42,
+                "fusion_updates": 42,
+                "fusion_vjp_samples_including_forward": 24504,
+                "proposal_attempts": 125,
+                "rejected_proposals": 39
+              }
+            },
+            "replay_endpoint": {
+              "target_reached": true,
+              "final_loss": 0.009987433961628813,
+              "rounds": 618,
+              "total_logical_bytes": 5327976,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  3552,
+                  3552,
+                  3552,
+                  3552
+                ],
+                "coordinator_max_observed_bytes": 9136,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 618,
+                "boundary_setup_sample_nodes": 29664,
+                "branch_forward_samples": 684588,
+                "branch_vjp_samples_including_forward": 474624,
+                "capsule_forward_samples": 1159164,
+                "capsule_vjp_samples_including_forward": 474624,
+                "committed_prefix_node_steps": 30592,
+                "fusion_forward_samples": 15000,
+                "fusion_line_search_trials": 322,
+                "fusion_updates": 309,
+                "fusion_vjp_samples_including_forward": 3708,
+                "joint_endpoint_conflicts": 230,
+                "local_step_size_reductions": 15164,
+                "proposal_attempts": 618,
+                "proposed_node_steps": 39552,
+                "selector_combinations": 1900,
+                "selector_projection_samples": 39936,
+                "selector_suffix_forward_samples": 22800
+              }
+            },
+            "replay_select": {
+              "target_reached": true,
+              "final_loss": 0.009997950035369406,
+              "rounds": 656,
+              "total_logical_bytes": 6583232,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  4392,
+                  4392,
+                  4392,
+                  4392
+                ],
+                "coordinator_max_observed_bytes": 19888,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 656,
+                "boundary_setup_sample_nodes": 31488,
+                "branch_forward_samples": 732756,
+                "branch_vjp_samples_including_forward": 515436,
+                "capsule_forward_samples": 1248144,
+                "capsule_vjp_samples_including_forward": 515436,
+                "committed_prefix_node_steps": 31145,
+                "conflict_menu_requests": 250,
+                "fusion_forward_samples": 15924,
+                "fusion_line_search_trials": 343,
+                "fusion_updates": 327,
+                "fusion_vjp_samples_including_forward": 3924,
+                "joint_endpoint_conflicts": 250,
+                "local_step_size_reductions": 15119,
+                "proposal_attempts": 656,
+                "proposed_node_steps": 41984,
+                "replayed_node_steps": 969,
+                "selector_combinations": 6100,
+                "selector_projection_samples": 67320,
+                "selector_suffix_forward_samples": 73200
+              }
+            },
+            "compressed": {
+              "target_reached": false,
+              "final_loss": 0.05430363849671274,
+              "rounds": 1000,
+              "total_logical_bytes": 20009728,
+              "dense_response_oracle_samples": 12000,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1968,
+                  1968,
+                  1968,
+                  1968
+                ],
+                "coordinator_max_observed_bytes": 17488,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 38,
+                "anchor_rebuilds": 1000,
+                "branch_forward_samples": 6518820,
+                "branch_vjp_samples_including_forward": 6117120,
+                "contract_installations": 1000,
+                "dense_response_oracle_samples": 12000,
+                "fusion_forward_samples": 28068,
+                "fusion_line_search_trials": 1800,
+                "fusion_updates": 351,
+                "fusion_vjp_samples_including_forward": 6000,
+                "joint_bound_sample_evaluations": 95580,
+                "local_objective_sample_evaluations": 6518772,
+                "local_step_size_reductions": 1611,
+                "proposal_attempts": 7965,
+                "rejected_proposals": 7927,
+                "step_size_reductions": 7279,
+                "summary_sample_nodes": 382320
+              }
+            }
+          },
+          "same_target_byte_savings": {
+            "backprop": 0.020781371970374884,
+            "compressed": null,
+            "replay_endpoint": -0.23559715734455255
+          }
+        }
+      ]
+    },
+    {
+      "source": "replay-conservative-2026-10-25.json",
+      "config": {
+        "max_rounds": 1500,
+        "local_steps": 16,
+        "learning_rate": 0.08,
+        "fusion_learning_rate": 0.2,
+        "fusion_interval": 2,
+        "initial_rank": 1,
+        "refresh_period": 4,
+        "max_attempts": 8,
+        "target_loss": 0.01
+      },
+      "all_safety_checks_passed": true,
+      "all_targets_reached": false,
+      "cases": [
+        {
+          "seed": 17,
+          "methods": {
+            "backprop": {
+              "target_reached": true,
+              "final_loss": 0.009987839037392202,
+              "rounds": 74,
+              "total_logical_bytes": 3981184,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1296,
+                  1296,
+                  1296,
+                  1296
+                ],
+                "coordinator_max_observed_bytes": 2992,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 74,
+                "branch_forward_samples": 56880,
+                "branch_vjp_samples_including_forward": 56832,
+                "fusion_forward_samples": 15972,
+                "fusion_line_search_trials": 36,
+                "fusion_updates": 36,
+                "fusion_vjp_samples_including_forward": 14640,
+                "proposal_attempts": 74
+              }
+            },
+            "replay_endpoint": {
+              "target_reached": true,
+              "final_loss": 0.009972703661344647,
+              "rounds": 74,
+              "total_logical_bytes": 643048,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  3552,
+                  3552,
+                  3552,
+                  3552
+                ],
+                "coordinator_max_observed_bytes": 7216,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 74,
+                "boundary_setup_sample_nodes": 3552,
+                "branch_forward_samples": 60432,
+                "branch_vjp_samples_including_forward": 56832,
+                "capsule_forward_samples": 117216,
+                "capsule_vjp_samples_including_forward": 56832,
+                "committed_prefix_node_steps": 4736,
+                "fusion_forward_samples": 1764,
+                "fusion_line_search_trials": 36,
+                "fusion_updates": 36,
+                "fusion_vjp_samples_including_forward": 432,
+                "proposal_attempts": 74,
+                "proposed_node_steps": 4736,
+                "selector_combinations": 74,
+                "selector_projection_samples": 3552,
+                "selector_suffix_forward_samples": 888
+              }
+            },
+            "replay_select": {
+              "target_reached": true,
+              "final_loss": 0.009972703661344647,
+              "rounds": 74,
+              "total_logical_bytes": 643048,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  4128,
+                  4128,
+                  4128,
+                  4128
+                ],
+                "coordinator_max_observed_bytes": 7216,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 74,
+                "boundary_setup_sample_nodes": 3552,
+                "branch_forward_samples": 60432,
+                "branch_vjp_samples_including_forward": 56832,
+                "capsule_forward_samples": 117216,
+                "capsule_vjp_samples_including_forward": 56832,
+                "committed_prefix_node_steps": 4736,
+                "fusion_forward_samples": 1764,
+                "fusion_line_search_trials": 36,
+                "fusion_updates": 36,
+                "fusion_vjp_samples_including_forward": 432,
+                "proposal_attempts": 74,
+                "proposed_node_steps": 4736,
+                "selector_combinations": 74,
+                "selector_projection_samples": 3552,
+                "selector_suffix_forward_samples": 888
+              }
+            },
+            "compressed": {
+              "target_reached": true,
+              "final_loss": 0.009981637934355995,
+              "rounds": 160,
+              "total_logical_bytes": 2493184,
+              "dense_response_oracle_samples": 1920,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1968,
+                  1968,
+                  1968,
+                  1968
+                ],
+                "coordinator_max_observed_bytes": 17488,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 137,
+                "anchor_rebuilds": 160,
+                "branch_forward_samples": 687120,
+                "branch_vjp_samples_including_forward": 646656,
+                "contract_installations": 160,
+                "dense_response_oracle_samples": 1920,
+                "fusion_forward_samples": 3576,
+                "fusion_line_search_trials": 80,
+                "fusion_updates": 80,
+                "fusion_vjp_samples_including_forward": 960,
+                "joint_bound_sample_evaluations": 10104,
+                "local_objective_sample_evaluations": 687072,
+                "proposal_attempts": 842,
+                "rejected_proposals": 705,
+                "step_size_reductions": 625,
+                "summary_sample_nodes": 40416
+              }
+            }
+          },
+          "same_target_byte_savings": {
+            "backprop": 0.8384782014596663,
+            "compressed": 0.7420776003696479,
+            "replay_endpoint": 0.0
+          }
+        },
+        {
+          "seed": 31,
+          "methods": {
+            "backprop": {
+              "target_reached": true,
+              "final_loss": 0.009998516881176435,
+              "rounds": 627,
+              "total_logical_bytes": 33817984,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1296,
+                  1296,
+                  1296,
+                  1296
+                ],
+                "coordinator_max_observed_bytes": 2992,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 627,
+                "branch_forward_samples": 483120,
+                "branch_vjp_samples_including_forward": 483072,
+                "fusion_forward_samples": 135840,
+                "fusion_line_search_trials": 313,
+                "fusion_updates": 313,
+                "fusion_vjp_samples_including_forward": 124524,
+                "proposal_attempts": 629,
+                "rejected_proposals": 2
+              }
+            },
+            "replay_endpoint": {
+              "target_reached": true,
+              "final_loss": 0.009990190436633978,
+              "rounds": 408,
+              "total_logical_bytes": 3519456,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  3552,
+                  3552,
+                  3552,
+                  3552
+                ],
+                "coordinator_max_observed_bytes": 9136,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 408,
+                "boundary_setup_sample_nodes": 19584,
+                "branch_forward_samples": 403200,
+                "branch_vjp_samples_including_forward": 313344,
+                "capsule_forward_samples": 716496,
+                "capsule_vjp_samples_including_forward": 313344,
+                "committed_prefix_node_steps": 24048,
+                "fusion_forward_samples": 9780,
+                "fusion_line_search_trials": 203,
+                "fusion_updates": 203,
+                "fusion_vjp_samples_including_forward": 2436,
+                "joint_endpoint_conflicts": 62,
+                "local_step_size_reductions": 5879,
+                "proposal_attempts": 408,
+                "proposed_node_steps": 26112,
+                "selector_combinations": 768,
+                "selector_projection_samples": 22452,
+                "selector_suffix_forward_samples": 9216
+              }
+            },
+            "replay_select": {
+              "target_reached": true,
+              "final_loss": 0.009992622368907552,
+              "rounds": 404,
+              "total_logical_bytes": 3785680,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  4392,
+                  4392,
+                  4392,
+                  4392
+                ],
+                "coordinator_max_observed_bytes": 19888,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 404,
+                "boundary_setup_sample_nodes": 19392,
+                "branch_forward_samples": 424296,
+                "branch_vjp_samples_including_forward": 316368,
+                "capsule_forward_samples": 740616,
+                "capsule_vjp_samples_including_forward": 316368,
+                "committed_prefix_node_steps": 22988,
+                "conflict_menu_requests": 81,
+                "fusion_forward_samples": 9708,
+                "fusion_line_search_trials": 202,
+                "fusion_updates": 202,
+                "fusion_vjp_samples_including_forward": 2424,
+                "joint_endpoint_conflicts": 81,
+                "local_step_size_reductions": 7251,
+                "proposal_attempts": 404,
+                "proposed_node_steps": 25856,
+                "replayed_node_steps": 508,
+                "selector_combinations": 2232,
+                "selector_projection_samples": 31056,
+                "selector_suffix_forward_samples": 26784
+              }
+            },
+            "compressed": {
+              "target_reached": true,
+              "final_loss": 0.009997893584687787,
+              "rounds": 998,
+              "total_logical_bytes": 16590080,
+              "dense_response_oracle_samples": 11928,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1968,
+                  1968,
+                  1968,
+                  1968
+                ],
+                "coordinator_max_observed_bytes": 17488,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 691,
+                "anchor_rebuilds": 994,
+                "branch_forward_samples": 4786704,
+                "branch_vjp_samples_including_forward": 4505088,
+                "contract_installations": 994,
+                "dense_response_oracle_samples": 11928,
+                "fusion_forward_samples": 20280,
+                "fusion_line_search_trials": 499,
+                "fusion_updates": 499,
+                "fusion_vjp_samples_including_forward": 5988,
+                "joint_bound_sample_evaluations": 70392,
+                "local_objective_sample_evaluations": 4786656,
+                "proposal_attempts": 5866,
+                "rejected_proposals": 5175,
+                "step_size_reductions": 4680,
+                "summary_sample_nodes": 281568
+              }
+            }
+          },
+          "same_target_byte_savings": {
+            "backprop": 0.8880571946571386,
+            "compressed": 0.7718106241802329,
+            "replay_endpoint": -0.07564350854222934
+          }
+        },
+        {
+          "seed": 47,
+          "methods": {
+            "backprop": {
+              "target_reached": true,
+              "final_loss": 0.009997877979215175,
+              "rounds": 1186,
+              "total_logical_bytes": 67955584,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1296,
+                  1296,
+                  1296,
+                  1296
+                ],
+                "coordinator_max_observed_bytes": 2992,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 1186,
+                "branch_forward_samples": 970800,
+                "branch_vjp_samples_including_forward": 970752,
+                "fusion_forward_samples": 272556,
+                "fusion_line_search_trials": 631,
+                "fusion_updates": 593,
+                "fusion_vjp_samples_including_forward": 249804,
+                "proposal_attempts": 1264,
+                "rejected_proposals": 78
+              }
+            },
+            "replay_endpoint": {
+              "target_reached": false,
+              "final_loss": 0.012172654598986995,
+              "rounds": 1500,
+              "total_logical_bytes": 10637784,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  3552,
+                  3552,
+                  3552,
+                  3552
+                ],
+                "coordinator_max_observed_bytes": 9136,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 662,
+                "boundary_setup_sample_nodes": 72000,
+                "branch_forward_samples": 2824224,
+                "branch_vjp_samples_including_forward": 1152000,
+                "capsule_forward_samples": 3976176,
+                "capsule_vjp_samples_including_forward": 1152000,
+                "committed_prefix_node_steps": 33504,
+                "fusion_forward_samples": 63072,
+                "fusion_line_search_trials": 3843,
+                "fusion_updates": 320,
+                "fusion_vjp_samples_including_forward": 9000,
+                "joint_endpoint_conflicts": 1091,
+                "local_step_size_reductions": 143576,
+                "proposal_attempts": 1500,
+                "proposed_node_steps": 96000,
+                "rejected_proposals": 838,
+                "selector_combinations": 6230,
+                "selector_projection_samples": 113628,
+                "selector_suffix_forward_samples": 74760
+              }
+            },
+            "replay_select": {
+              "target_reached": false,
+              "final_loss": 0.011984105283142315,
+              "rounds": 1500,
+              "total_logical_bytes": 14769592,
+              "dense_response_oracle_samples": 0,
+              "max_replay_feature_error": 0.0,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  4392,
+                  4392,
+                  4392,
+                  4392
+                ],
+                "coordinator_max_observed_bytes": 19888,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 670,
+                "boundary_setup_sample_nodes": 72000,
+                "branch_forward_samples": 2611620,
+                "branch_vjp_samples_including_forward": 1187988,
+                "capsule_forward_samples": 3799560,
+                "capsule_vjp_samples_including_forward": 1187988,
+                "committed_prefix_node_steps": 31655,
+                "conflict_menu_requests": 1100,
+                "fusion_forward_samples": 61560,
+                "fusion_line_search_trials": 3709,
+                "fusion_updates": 333,
+                "fusion_vjp_samples_including_forward": 9000,
+                "joint_endpoint_conflicts": 1100,
+                "local_step_size_reductions": 119367,
+                "proposal_attempts": 1500,
+                "proposed_node_steps": 96000,
+                "rejected_proposals": 830,
+                "replayed_node_steps": 2999,
+                "selector_combinations": 17990,
+                "selector_projection_samples": 220356,
+                "selector_suffix_forward_samples": 215880
+              }
+            },
+            "compressed": {
+              "target_reached": false,
+              "final_loss": 0.04329950485254008,
+              "rounds": 1500,
+              "total_logical_bytes": 29961344,
+              "dense_response_oracle_samples": 18000,
+              "max_replay_feature_error": null,
+              "retained_arrays": {
+                "node_max_observed_bytes": [
+                  1968,
+                  1968,
+                  1968,
+                  1968
+                ],
+                "coordinator_max_observed_bytes": 17488,
+                "scope": "retained ndarray storage at observation points; excludes transient buffers, not measured peak RAM"
+              },
+              "work": {
+                "accepted_proposals": 375,
+                "anchor_rebuilds": 1500,
+                "branch_forward_samples": 9524412,
+                "branch_vjp_samples_including_forward": 8963328,
+                "contract_installations": 1500,
+                "dense_response_oracle_samples": 18000,
+                "fusion_forward_samples": 51540,
+                "fusion_line_search_trials": 3169,
+                "fusion_updates": 567,
+                "fusion_vjp_samples_including_forward": 9000,
+                "joint_bound_sample_evaluations": 140052,
+                "local_objective_sample_evaluations": 9524364,
+                "local_step_size_reductions": 69,
+                "proposal_attempts": 11671,
+                "rejected_proposals": 11296,
+                "step_size_reductions": 10364,
+                "summary_sample_nodes": 560208
+              }
+            }
+          },
+          "same_target_byte_savings": {
+            "backprop": null,
+            "compressed": null,
+            "replay_endpoint": null
+          }
+        }
+      ]
+    }
+  ]
+}

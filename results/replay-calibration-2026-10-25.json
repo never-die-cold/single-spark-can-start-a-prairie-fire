@@ -1,0 +1,515 @@
+{
+  "scope": "exploratory calibration on backprop only; same three training seeds, not held-out validation",
+  "target_loss": 0.01,
+  "max_rounds": 1000,
+  "local_steps": 16,
+  "fusion_interval": 2,
+  "selected_rates": [
+    0.5,
+    0.15
+  ],
+  "selection_rule": "all three seeds meet fixed target, then smallest maximum rounds among these candidates",
+  "runs": [
+    {
+      "learning_rate": 0.08,
+      "fusion_learning_rate": 0.2,
+      "seed": 17,
+      "final_loss": 0.009987839037392202,
+      "target_reached": true,
+      "rounds": 74,
+      "ledger": {
+        "payload_bytes": 2729856,
+        "metadata_bytes": 1251328,
+        "total_logical_bytes": 3981184,
+        "by_category": {
+          "backprop_feature_gradients": {
+            "payload_bytes": 1363968,
+            "metadata_bytes": 606208,
+            "messages": 4736
+          },
+          "backprop_features": {
+            "payload_bytes": 1278720,
+            "metadata_bytes": 568320,
+            "messages": 4440
+          },
+          "backprop_trial_features": {
+            "payload_bytes": 85248,
+            "metadata_bytes": 37888,
+            "messages": 296
+          },
+          "fixed_input_distribution": {
+            "payload_bytes": 768,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "initial_features": {
+            "payload_bytes": 1152,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "proposal_decisions": {
+            "payload_bytes": 0,
+            "metadata_bytes": 37888,
+            "messages": 296
+          }
+        },
+        "work": {
+          "accepted_proposals": 74,
+          "branch_forward_samples": 56880,
+          "branch_vjp_samples_including_forward": 56832,
+          "fusion_forward_samples": 15972,
+          "fusion_line_search_trials": 36,
+          "fusion_updates": 36,
+          "fusion_vjp_samples_including_forward": 14640,
+          "proposal_attempts": 74
+        }
+      }
+    },
+    {
+      "learning_rate": 0.08,
+      "fusion_learning_rate": 0.2,
+      "seed": 31,
+      "final_loss": 0.009998516881176435,
+      "target_reached": true,
+      "rounds": 627,
+      "ledger": {
+        "payload_bytes": 23189376,
+        "metadata_bytes": 10628608,
+        "total_logical_bytes": 33817984,
+        "by_category": {
+          "backprop_feature_gradients": {
+            "payload_bytes": 11593728,
+            "metadata_bytes": 5152768,
+            "messages": 40256
+          },
+          "backprop_features": {
+            "payload_bytes": 10869120,
+            "metadata_bytes": 4830720,
+            "messages": 37740
+          },
+          "backprop_trial_features": {
+            "payload_bytes": 724608,
+            "metadata_bytes": 322048,
+            "messages": 2516
+          },
+          "fixed_input_distribution": {
+            "payload_bytes": 768,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "initial_features": {
+            "payload_bytes": 1152,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "proposal_decisions": {
+            "payload_bytes": 0,
+            "metadata_bytes": 322048,
+            "messages": 2516
+          }
+        },
+        "work": {
+          "accepted_proposals": 627,
+          "branch_forward_samples": 483120,
+          "branch_vjp_samples_including_forward": 483072,
+          "fusion_forward_samples": 135840,
+          "fusion_line_search_trials": 313,
+          "fusion_updates": 313,
+          "fusion_vjp_samples_including_forward": 124524,
+          "proposal_attempts": 629,
+          "rejected_proposals": 2
+        }
+      }
+    },
+    {
+      "learning_rate": 0.08,
+      "fusion_learning_rate": 0.2,
+      "seed": 47,
+      "final_loss": 0.010296349676304202,
+      "target_reached": false,
+      "rounds": 1000,
+      "ledger": {
+        "payload_bytes": 38377344,
+        "metadata_bytes": 17589760,
+        "total_logical_bytes": 55967104,
+        "by_category": {
+          "backprop_feature_gradients": {
+            "payload_bytes": 19187712,
+            "metadata_bytes": 8527872,
+            "messages": 66624
+          },
+          "backprop_features": {
+            "payload_bytes": 17988480,
+            "metadata_bytes": 7994880,
+            "messages": 62460
+          },
+          "backprop_trial_features": {
+            "payload_bytes": 1199232,
+            "metadata_bytes": 532992,
+            "messages": 4164
+          },
+          "fixed_input_distribution": {
+            "payload_bytes": 768,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "initial_features": {
+            "payload_bytes": 1152,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "proposal_decisions": {
+            "payload_bytes": 0,
+            "metadata_bytes": 532992,
+            "messages": 4164
+          }
+        },
+        "work": {
+          "accepted_proposals": 1000,
+          "branch_forward_samples": 799536,
+          "branch_vjp_samples_including_forward": 799488,
+          "fusion_forward_samples": 224688,
+          "fusion_line_search_trials": 526,
+          "fusion_updates": 500,
+          "fusion_vjp_samples_including_forward": 205872,
+          "proposal_attempts": 1041,
+          "rejected_proposals": 41
+        }
+      }
+    },
+    {
+      "learning_rate": 0.25,
+      "fusion_learning_rate": 0.2,
+      "seed": 17,
+      "final_loss": 0.009931580172254774,
+      "target_reached": true,
+      "rounds": 36,
+      "ledger": {
+        "payload_bytes": 1329024,
+        "metadata_bytes": 609280,
+        "total_logical_bytes": 1938304,
+        "by_category": {
+          "backprop_feature_gradients": {
+            "payload_bytes": 663552,
+            "metadata_bytes": 294912,
+            "messages": 2304
+          },
+          "backprop_features": {
+            "payload_bytes": 622080,
+            "metadata_bytes": 276480,
+            "messages": 2160
+          },
+          "backprop_trial_features": {
+            "payload_bytes": 41472,
+            "metadata_bytes": 18432,
+            "messages": 144
+          },
+          "fixed_input_distribution": {
+            "payload_bytes": 768,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "initial_features": {
+            "payload_bytes": 1152,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "proposal_decisions": {
+            "payload_bytes": 0,
+            "metadata_bytes": 18432,
+            "messages": 144
+          }
+        },
+        "work": {
+          "accepted_proposals": 36,
+          "branch_forward_samples": 27696,
+          "branch_vjp_samples_including_forward": 27648,
+          "fusion_forward_samples": 7788,
+          "fusion_line_search_trials": 18,
+          "fusion_updates": 18,
+          "fusion_vjp_samples_including_forward": 7128,
+          "proposal_attempts": 36
+        }
+      }
+    },
+    {
+      "learning_rate": 0.25,
+      "fusion_learning_rate": 0.2,
+      "seed": 31,
+      "final_loss": 0.009996879086673814,
+      "target_reached": true,
+      "rounds": 534,
+      "ledger": {
+        "payload_bytes": 19982208,
+        "metadata_bytes": 9158656,
+        "total_logical_bytes": 29140864,
+        "by_category": {
+          "backprop_feature_gradients": {
+            "payload_bytes": 9990144,
+            "metadata_bytes": 4440064,
+            "messages": 34688
+          },
+          "backprop_features": {
+            "payload_bytes": 9365760,
+            "metadata_bytes": 4162560,
+            "messages": 32520
+          },
+          "backprop_trial_features": {
+            "payload_bytes": 624384,
+            "metadata_bytes": 277504,
+            "messages": 2168
+          },
+          "fixed_input_distribution": {
+            "payload_bytes": 768,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "initial_features": {
+            "payload_bytes": 1152,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "proposal_decisions": {
+            "payload_bytes": 0,
+            "metadata_bytes": 277504,
+            "messages": 2168
+          }
+        },
+        "work": {
+          "accepted_proposals": 534,
+          "branch_forward_samples": 416304,
+          "branch_vjp_samples_including_forward": 416256,
+          "fusion_forward_samples": 116988,
+          "fusion_line_search_trials": 267,
+          "fusion_updates": 267,
+          "fusion_vjp_samples_including_forward": 107268,
+          "proposal_attempts": 542,
+          "rejected_proposals": 8
+        }
+      }
+    },
+    {
+      "learning_rate": 0.25,
+      "fusion_learning_rate": 0.2,
+      "seed": 47,
+      "final_loss": 0.009995206496947413,
+      "target_reached": true,
+      "rounds": 596,
+      "ledger": {
+        "payload_bytes": 22968192,
+        "metadata_bytes": 10527232,
+        "total_logical_bytes": 33495424,
+        "by_category": {
+          "backprop_feature_gradients": {
+            "payload_bytes": 11483136,
+            "metadata_bytes": 5103616,
+            "messages": 39872
+          },
+          "backprop_features": {
+            "payload_bytes": 10765440,
+            "metadata_bytes": 4784640,
+            "messages": 37380
+          },
+          "backprop_trial_features": {
+            "payload_bytes": 717696,
+            "metadata_bytes": 318976,
+            "messages": 2492
+          },
+          "fixed_input_distribution": {
+            "payload_bytes": 768,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "initial_features": {
+            "payload_bytes": 1152,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "proposal_decisions": {
+            "payload_bytes": 0,
+            "metadata_bytes": 318976,
+            "messages": 2492
+          }
+        },
+        "work": {
+          "accepted_proposals": 596,
+          "branch_forward_samples": 478512,
+          "branch_vjp_samples_including_forward": 478464,
+          "fusion_forward_samples": 134256,
+          "fusion_line_search_trials": 298,
+          "fusion_updates": 298,
+          "fusion_vjp_samples_including_forward": 123192,
+          "proposal_attempts": 623,
+          "rejected_proposals": 27
+        }
+      }
+    },
+    {
+      "learning_rate": 0.5,
+      "fusion_learning_rate": 0.15,
+      "seed": 17,
+      "final_loss": 0.009983242191585959,
+      "target_reached": true,
+      "rounds": 29,
+      "ledger": {
+        "payload_bytes": 1070976,
+        "metadata_bytes": 491008,
+        "total_logical_bytes": 1561984,
+        "by_category": {
+          "backprop_feature_gradients": {
+            "payload_bytes": 534528,
+            "metadata_bytes": 237568,
+            "messages": 1856
+          },
+          "backprop_features": {
+            "payload_bytes": 501120,
+            "metadata_bytes": 222720,
+            "messages": 1740
+          },
+          "backprop_trial_features": {
+            "payload_bytes": 33408,
+            "metadata_bytes": 14848,
+            "messages": 116
+          },
+          "fixed_input_distribution": {
+            "payload_bytes": 768,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "initial_features": {
+            "payload_bytes": 1152,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "proposal_decisions": {
+            "payload_bytes": 0,
+            "metadata_bytes": 14848,
+            "messages": 116
+          }
+        },
+        "work": {
+          "accepted_proposals": 29,
+          "branch_forward_samples": 22320,
+          "branch_vjp_samples_including_forward": 22272,
+          "fusion_forward_samples": 6264,
+          "fusion_line_search_trials": 14,
+          "fusion_updates": 14,
+          "fusion_vjp_samples_including_forward": 5736,
+          "proposal_attempts": 29
+        }
+      }
+    },
+    {
+      "learning_rate": 0.5,
+      "fusion_learning_rate": 0.15,
+      "seed": 31,
+      "final_loss": 0.009968422629840915,
+      "target_reached": true,
+      "rounds": 426,
+      "ledger": {
+        "payload_bytes": 32110464,
+        "metadata_bytes": 14717440,
+        "total_logical_bytes": 46827904,
+        "by_category": {
+          "backprop_feature_gradients": {
+            "payload_bytes": 16054272,
+            "metadata_bytes": 7135232,
+            "messages": 55744
+          },
+          "backprop_features": {
+            "payload_bytes": 15050880,
+            "metadata_bytes": 6689280,
+            "messages": 52260
+          },
+          "backprop_trial_features": {
+            "payload_bytes": 1003392,
+            "metadata_bytes": 445952,
+            "messages": 3484
+          },
+          "fixed_input_distribution": {
+            "payload_bytes": 768,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "initial_features": {
+            "payload_bytes": 1152,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "proposal_decisions": {
+            "payload_bytes": 0,
+            "metadata_bytes": 445952,
+            "messages": 3484
+          }
+        },
+        "work": {
+          "accepted_proposals": 426,
+          "branch_forward_samples": 668976,
+          "branch_vjp_samples_including_forward": 668928,
+          "fusion_forward_samples": 182808,
+          "fusion_line_search_trials": 213,
+          "fusion_updates": 213,
+          "fusion_vjp_samples_including_forward": 169788,
+          "proposal_attempts": 871,
+          "rejected_proposals": 445
+        }
+      }
+    },
+    {
+      "learning_rate": 0.5,
+      "fusion_learning_rate": 0.15,
+      "seed": 47,
+      "final_loss": 0.009997574796457525,
+      "target_reached": true,
+      "rounds": 86,
+      "ledger": {
+        "payload_bytes": 4609920,
+        "metadata_bytes": 2113024,
+        "total_logical_bytes": 6722944,
+        "by_category": {
+          "backprop_feature_gradients": {
+            "payload_bytes": 2304000,
+            "metadata_bytes": 1024000,
+            "messages": 8000
+          },
+          "backprop_features": {
+            "payload_bytes": 2160000,
+            "metadata_bytes": 960000,
+            "messages": 7500
+          },
+          "backprop_trial_features": {
+            "payload_bytes": 144000,
+            "metadata_bytes": 64000,
+            "messages": 500
+          },
+          "fixed_input_distribution": {
+            "payload_bytes": 768,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "initial_features": {
+            "payload_bytes": 1152,
+            "metadata_bytes": 512,
+            "messages": 4
+          },
+          "proposal_decisions": {
+            "payload_bytes": 0,
+            "metadata_bytes": 64000,
+            "messages": 500
+          }
+        },
+        "work": {
+          "accepted_proposals": 86,
+          "branch_forward_samples": 96048,
+          "branch_vjp_samples_including_forward": 96000,
+          "fusion_forward_samples": 26520,
+          "fusion_line_search_trials": 42,
+          "fusion_updates": 42,
+          "fusion_vjp_samples_including_forward": 24504,
+          "proposal_attempts": 125,
+          "rejected_proposals": 39
+        }
+      }
+    }
+  ]
+}

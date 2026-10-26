@@ -26,3 +26,7 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Reproduce reference experiments
         run: python -m prairie_fire.experiments --output results/latest.json
+      - name: Check bounded end-to-end training and ablations
+        run: python -m prairie_fire.training --seeds 17 31 --rounds 12 --output results/m1-latest.json
+      - name: Check exact boundary replay without Jacobian construction
+        run: python -m prairie_fire.replay --seeds 17 --rounds 4 --skip-contract --output results/replay-latest.json

@@ -41,3 +41,9 @@ CoeF-J 的式 (10)–(12) 已经考虑输出空间曲率上界和 `JᵀJ` 敏感
 - 与相同模型、数据和精度目标的基线比较，而非仅展示几个新符号。
 
 当前结论：已有明确先例；候选协议值得继续检验，但**尚未确立学术首创性**。
+
+## 新的精确边界重放路线
+
+2026-10-25 补充核对：[FedBCD](https://arxiv.org/abs/1912.11187) 已包含多次本地更新；[EF-VFL](https://arxiv.org/html/2406.14420v2) 第 3 节明确讨论在客户端执行融合模型前后向和多步本地更新；[Speculative Approximations for Terascale Distributed Gradient Descent Optimization](https://faculty.ucmerced.edu/frusu/Papers/Conference/2015-danac-gd.pdf) 已研究多个候选的推测式试算与选择。
+
+因此，复制融合尾部、缓存、减少同步和候选选择不能单独视为新贡献。新原型的候选差别是聚合边界、冲突时增量请求前缀特征菜单，以及联合选步后的确定性重放事务；详细机制与限制见 [replay-design.md](replay-design.md)。尚未完成完整新颖性审查或对这些论文的实现排名。
