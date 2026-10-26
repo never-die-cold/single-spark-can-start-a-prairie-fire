@@ -1,6 +1,6 @@
 # Windows 本地工作目录
 
-本次工作环境不能直接访问电脑的 E: 盘；代码通过 GitHub 同步到本地。目标路径：
+项目已可在本地 E: 盘直接开发。目标路径：
 
 ~~~text
 E:\2_项目代码\single spark can start a prairie fire
@@ -35,6 +35,7 @@ py -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 .\.venv\Scripts\python.exe -m prairie_fire.experiments --output results/latest.json
+.\.venv\Scripts\python.exe -m prairie_fire.training --output results/m1-latest.json
 ~~~
 
 快速运行：
@@ -43,4 +44,4 @@ py -m venv .venv
 .\.venv\Scripts\python.exe -m prairie_fire.experiments --quick
 ~~~
 
-打开 [roadmap.md](roadmap.md) 继续 M1。当前结果只有单进程模拟；仓库中没有真实设备 Agent 或分布式服务需要启动。
+打开 [m1-training.md](m1-training.md) 查看完整小网络训练及结果解释，按 [roadmap.md](roadmap.md) 继续 M1.1。当前结果只有单进程模拟；仓库中没有真实设备 Agent 或分布式服务需要启动。

@@ -107,6 +107,46 @@ class ReLUNetwork:
             raise FloatingPointError("network output overflowed")
         return result
 
+    def forward_batch(self, value: object) -> Array:
+        """Evaluate a fixed batch; the dense response oracle stays single-sample."""
+        result = frozen_array(value)
+        if result.ndim != 2 or result.shape[0] < 1 or result.shape[1] != self.weights[0].shape[1]:
+            raise ValueError("expected a nonempty batch of input feature vectors")
+        for index, (weight, bias) in enumerate(zip(self.weights, self.biases)):
+            result = result @ weight.T + bias
+            if index < len(self.weights) - 1:
+                result = np.maximum(result, 0.0)
+        if not np.all(np.isfinite(result)):
+            raise FloatingPointError("network output overflowed")
+        return result
+
+    def vjp_batch(self, value: object, output_cotangent: object) -> tuple[Array, tuple[Array, ...], tuple[Array, ...]]:
+        """Ordinary backpropagation, including a forward pass, without a Jacobian.
+
+        Parameter cotangents are summed across the batch. Callers put any loss
+        normalization in output_cotangent. ReLU uses derivative zero at zero.
+        """
+        inputs = frozen_array(value)
+        cotangent = frozen_array(output_cotangent)
+        if inputs.ndim != 2 or inputs.shape[0] < 1 or inputs.shape[1] != self.weights[0].shape[1]:
+            raise ValueError("expected a nonempty batch of input feature vectors")
+        if cotangent.shape != (inputs.shape[0], self.weights[-1].shape[0]):
+            raise ValueError("output cotangent does not match batch output")
+        activations = [inputs]
+        preactivations = []
+        for index, (weight, bias) in enumerate(zip(self.weights, self.biases)):
+            pre = activations[-1] @ weight.T + bias
+            preactivations.append(pre)
+            activations.append(np.maximum(pre, 0.0) if index < len(self.weights) - 1 else pre)
+        dw, db = [], []
+        for index in range(len(self.weights) - 1, -1, -1):
+            if index < len(self.weights) - 1:
+                cotangent = cotangent * (preactivations[index] > 0)
+            dw.append(frozen_array(cotangent.T @ activations[index]))
+            db.append(frozen_array(cotangent.sum(axis=0)))
+            cotangent = cotangent @ self.weights[index]
+        return frozen_array(cotangent), tuple(reversed(dw)), tuple(reversed(db))
+
     def response_at(self, value: object) -> Response:
         result = self._input(value)
         jacobian = np.eye(result.size)

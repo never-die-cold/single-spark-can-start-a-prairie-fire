@@ -43,6 +43,8 @@ class LossContract:
     basis: Array
     projected_residual: Array
     base_loss: float
+    residual_tail_norm: float
+    basis_strategy: str
     response: Response
     nodes: tuple[NodeContract, ...]
 
@@ -62,14 +64,14 @@ class Decision:
     radius_inf: float
 
 
-def _make_basis(residual: Array, jacobian: Array, rank: int, seed: int) -> Array:
+def _make_basis(residual: Array, jacobian: Array, rank: int, seed: int, *, anchored: bool = True) -> Array:
     if not 1 <= rank <= residual.size:
         raise ValueError("rank must be between 1 and the output dimension")
     rng = np.random.default_rng(seed)
     columns: list[Array] = []
-    if np.linalg.norm(residual) > 0:
+    if anchored and np.linalg.norm(residual) > 0:
         columns.append(residual)
-    if rank > 1:
+    if anchored and rank > 1:
         columns.extend((jacobian @ rng.normal(size=(jacobian.shape[1], rank - 1))).T)
     columns.extend(rng.normal(size=(residual.size, rank)).T)
     basis: list[Array] = []
@@ -96,12 +98,17 @@ def compile_contract(
     rank: int = 4,
     seed: int = 20261025,
     basis: object | None = None,
+    basis_strategy: str = "anchored",
 ) -> LossContract:
     """Compile a single-sample contract using the dense mathematical oracle.
 
     Frobenius tail bounds are deterministic upper bounds on spectral norms in
     exact arithmetic. They may be too loose for a practical training system.
+    The default basis preserves the base gradient. The explicit random-space
+    ablation does not; judge then also charges the omitted base residual norm.
     """
+    if basis_strategy not in ("anchored", "random"):
+        raise ValueError("basis strategy must be anchored or random")
     base = frozen_array(base_features)
     target_array = frozen_array(target)
     sizes = tuple(block_sizes)
@@ -113,13 +120,13 @@ def compile_contract(
     if target_array.shape != response.output.shape:
         raise ValueError("target dimension does not match output")
     residual = response.output - target_array
-    q = _make_basis(residual, response.jacobian, rank, seed) if basis is None else frozen_array(basis)
+    q = _make_basis(residual, response.jacobian, rank, seed, anchored=basis_strategy == "anchored") if basis is None else frozen_array(basis)
     if q.ndim != 2 or q.shape[0] != residual.size or not 1 <= q.shape[1] <= residual.size:
         raise ValueError("invalid basis dimensions")
     if not np.allclose(q.T @ q, np.eye(q.shape[1]), atol=1e-10, rtol=0):
         raise ValueError("basis columns must be orthonormal")
     residual_error = np.linalg.norm(residual - q @ (q.T @ residual))
-    if residual_error > 1e-10 * max(1.0, np.linalg.norm(residual)):
+    if basis_strategy == "anchored" and residual_error > 1e-10 * max(1.0, np.linalg.norm(residual)):
         raise ValueError("basis must contain the full base loss residual")
     digest = sha256(network.version.encode("ascii"))
     for array in (base, target_array, q):
@@ -142,6 +149,7 @@ def compile_contract(
     return LossContract(
         anchor_id, network.version, base, target_array, frozen_array(q),
         frozen_array(q.T @ residual), float(residual @ residual / 2),
+        float(residual_error) if basis_strategy == "random" else 0.0, basis_strategy,
         response, tuple(nodes),
     )
 
@@ -196,7 +204,9 @@ def judge(
     radius = max(summary.radius_inf for summary in summaries)
     remainder = contract.response.remainder_bound(radius)
     projected_norm = float(np.linalg.norm(contract.projected_residual + p))
-    output_bound = math.hypot(projected_norm, discarded) + remainder
+    # Random-space ablation does not preserve e: its omitted residual must be
+    # charged as well. The default anchored protocol has residual_tail_norm=0.
+    output_bound = math.hypot(projected_norm, contract.residual_tail_norm + discarded) + remainder
     upper = output_bound * output_bound / 2
     if not math.isfinite(upper):
         upper = math.inf
@@ -227,4 +237,5 @@ def expand_contract(
     return compile_contract(
         network, contract.base_features, contract.target,
         [node.base_features.size for node in contract.nodes], basis=q,
+        basis_strategy=contract.basis_strategy,
     )

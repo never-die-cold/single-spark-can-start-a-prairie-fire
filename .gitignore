@@ -7,5 +7,9 @@ build/
 dist/
 .pytest_cache/
 /results/latest.json
+/results/m1-latest.json
+/results/m1-smoke.json
+/results/replay-latest.json
+/results/replay-pilot.json
 .DS_Store
 Thumbs.db
