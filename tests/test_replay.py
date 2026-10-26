@@ -5,14 +5,42 @@ from unittest.mock import patch
 import numpy as np
 
 from prairie_fire import ReLUNetwork
+from prairie_fire.networks import frozen_array
 from prairie_fire.replay import FeatureMenu, ReplayTrainer, Selection, select_menu
 from prairie_fire.training import TrainingConfig, make_problem
 
 
 class ReplayTests(unittest.TestCase):
-    def trainer(self, *, steps=4):
+    def trainer(self, *, steps=4, gate=False):
         return ReplayTrainer(*make_problem(17, samples=3),
-                             TrainingConfig(local_steps=steps, max_rounds=6, fusion_interval=2, target_loss=1e-9))
+                             TrainingConfig(local_steps=steps, max_rounds=6, fusion_interval=2, target_loss=1e-9),
+                             gate_menu=gate)
+
+    def conflicting_proposal(self, trainer, proposal, *, harmful_node, improving_node):
+        """Craft endpoints that jointly conflict while a rollback mix repairs.
+
+        One node gets a large harmful feature change, one node gets a small
+        true-gradient improvement, the others keep their committed features.
+        The joint endpoint is harmful, but rolling the harmful node back keeps
+        the improvement, so the restricted candidate set already contains an
+        accepted combination.
+        """
+        features = trainer.features
+        z = np.concatenate(features, axis=1)
+        error = trainer.fusion.forward_batch(z) - trainer.batch.targets
+        dz, _, _ = trainer.fusion.vjp_batch(z, error / len(z))
+        starts = np.cumsum([0] + [f.shape[1] for f in features])
+        rng = np.random.default_rng(5)
+        crafted = {
+            harmful_node: frozen_array(features[harmful_node] + 3. * rng.normal(size=features[harmful_node].shape)),
+            improving_node: frozen_array(features[improving_node]
+                                         - 1e-2 * dz[:, starts[improving_node]:starts[improving_node + 1]]),
+        }
+        menus = [FeatureMenu((0, menu.steps[-1]),
+                             (trainer.features[i], crafted.get(i, frozen_array(features[i]))),
+                             (trainer.branches[i].version, proposal.final_branches[i].version))
+                 for i, menu in enumerate(proposal.menus)]
+        return replace(proposal, menus=tuple(menus))
 
     def test_capsule_prediction_and_gradient_are_exact_across_gate_changes(self):
         trainer = self.trainer()
@@ -119,6 +147,87 @@ class ReplayTests(unittest.TestCase):
         self.assertAlmostEqual(endpoint_loss, .25)
         self.assertAlmostEqual(menu_loss, 0.)
         self.assertEqual(selected, (1, 1))
+
+    def test_gate_repairs_conflict_with_uploaded_candidates_only(self):
+        trainer = self.trainer(gate=True)
+        proposal = trainer.propose_replay()
+        crafted = self.conflicting_proposal(trainer, proposal, harmful_node=0, improving_node=1)
+        before_bytes = trainer.ledger.report()["total_logical_bytes"]
+        selection = trainer.choose(crafted)
+        self.assertLess(selection.loss, trainer.loss)
+        self.assertEqual(selection.indices, (0, 1, 0, 0))
+        self.assertNotIn("replay_menu_request", trainer.ledger.messages)
+        self.assertNotIn("replay_extra_menus", trainer.ledger.messages)
+        self.assertEqual(trainer.ledger.work["gate_accepted_without_menu"], 1)
+        self.assertEqual(trainer.ledger.work["gate_menu_requests"], 0)
+        # A gate pass must not add any wire bytes beyond the proposal upload.
+        self.assertEqual(trainer.ledger.report()["total_logical_bytes"], before_bytes)
+
+    def stalled_proposal(self, trainer, proposal):
+        """Every checkpoint of every menu equals the committed state, modeling
+        a window in which no branch accepted a single local step."""
+        menus = [FeatureMenu(menu.steps,
+                             tuple(trainer.features[i] for _ in menu.steps),
+                             tuple(trainer.branches[i].version for _ in menu.steps))
+                 for i, menu in enumerate(proposal.menus)]
+        return replace(proposal, menus=tuple(menus))
+
+    def test_stalled_conflict_skips_menu_request_in_gate_arm(self):
+        trainer = self.trainer(gate=True)
+        proposal = trainer.propose_replay()
+        selection = trainer.choose(self.stalled_proposal(trainer, proposal))
+        self.assertEqual(selection.indices, (0, 0, 0, 0))
+        self.assertEqual(selection.loss, trainer.loss)
+        self.assertEqual(trainer.ledger.work["stall_conflicts"], 1)
+        self.assertEqual(trainer.ledger.work["gate_accepted_without_menu"], 0)
+        self.assertEqual(trainer.ledger.work["gate_menu_requests"], 0)
+        self.assertNotIn("replay_menu_request", trainer.ledger.messages)
+        self.assertNotIn("replay_extra_menus", trainer.ledger.messages)
+
+    def test_reference_arm_still_requests_menus_on_stall(self):
+        trainer = self.trainer()
+        proposal = trainer.propose_replay()
+        trainer.choose(self.stalled_proposal(trainer, proposal))
+        self.assertEqual(trainer.ledger.work["stall_conflicts"], 1)
+        self.assertIn("replay_menu_request", trainer.ledger.messages)
+        self.assertGreater(trainer.ledger.payload["replay_extra_menus"], 0)
+
+    def test_gate_requests_menus_when_uploaded_candidates_all_fail(self):
+        trainer = self.trainer(gate=True)
+        proposal = trainer.propose_replay()
+        # Every endpoint is harmful and every restricted mix therefore fails,
+        # but the real intermediate checkpoint stays available on the nodes.
+        rng = np.random.default_rng(11)
+        menus = [FeatureMenu((0, menu.steps[1], menu.steps[-1]),
+                             (trainer.features[i],
+                              menu.features[1],
+                              frozen_array(trainer.features[i] + 3. * rng.normal(size=trainer.features[i].shape))),
+                             (menu.parameter_versions[0], menu.parameter_versions[1],
+                              proposal.final_branches[i].version))
+                 for i, menu in enumerate(proposal.menus)]
+        crafted = replace(proposal, menus=tuple(menus))
+        trainer.choose(crafted)
+        self.assertEqual(trainer.ledger.work["stall_conflicts"], 0)
+        self.assertEqual(trainer.ledger.work["gate_accepted_without_menu"], 0)
+        self.assertEqual(trainer.ledger.work["gate_menu_requests"], 1)
+        self.assertIn("replay_menu_request", trainer.ledger.messages)
+        self.assertGreater(trainer.ledger.payload["replay_extra_menus"], 0)
+        self.assertEqual(trainer.uploaded_menu_epoch, crafted.epoch_id)
+
+    def test_gate_is_byte_neutral_when_no_conflict_occurs(self):
+        batch, branches, fusion = make_problem(17)
+        config = TrainingConfig(local_steps=16, max_rounds=6, fusion_interval=2, target_loss=1e-9)
+        ungated = ReplayTrainer(batch, branches, fusion, config, seed=17).run()
+        # Guard the premise: the gated comparison below is only exact while
+        # this arm never hits a joint-endpoint conflict.
+        self.assertEqual(ungated["ledger"]["work"].get("joint_endpoint_conflicts", 0), 0)
+        gated = ReplayTrainer(batch, branches, fusion, config, gate_menu=True, seed=17).run()
+        self.assertEqual(gated["final_loss"], ungated["final_loss"])
+        self.assertEqual(gated["ledger"]["total_logical_bytes"], ungated["ledger"]["total_logical_bytes"])
+        self.assertEqual(gated["accepted_loss_increases"], 0)
+        self.assertEqual(gated["max_replay_feature_error"], 0.)
+        self.assertEqual(gated["ledger"]["work"].get("gate_accepted_without_menu", 0), 0)
+        self.assertEqual(gated["ledger"]["work"].get("gate_menu_requests", 0), 0)
 
 
 if __name__ == "__main__":

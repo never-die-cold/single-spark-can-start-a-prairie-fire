@@ -107,7 +107,8 @@ def select_menu(menus: tuple[FeatureMenu, ...], evaluate, current_loss: float, *
 
 
 class ReplayTrainer(Trainer):
-    def __init__(self, batch, branches, fusion, config, *, menu_steps: tuple[int, ...] | None = None, seed: int = 0):
+    def __init__(self, batch, branches, fusion, config, *, menu_steps: tuple[int, ...] | None = None,
+                 gate_menu: bool = False, seed: int = 0):
         if len(fusion.weights) < 2:
             raise ValueError("replay requires an affine/ReLU join and a nonempty suffix")
         if menu_steps is None:
@@ -117,6 +118,10 @@ class ReplayTrainer(Trainer):
                 or any(not isinstance(step, int) or isinstance(step, bool) for step in menu_steps)):
             raise ValueError("menu steps must be increasing positive integers ending at local_steps")
         self.menu_steps = menu_steps
+        # M1.1 gate: on a joint-endpoint conflict, first search the candidates
+        # that are already on the coordinator (committed features plus the
+        # endpoint upload) and only pay for intermediate menus if that fails.
+        self.gate_menu = gate_menu
         self.capsule_model_version: str | None = None
         self.active_epoch: str | None = None
         self.uploaded_menu_epoch: str | None = None
@@ -258,6 +263,46 @@ class ReplayTrainer(Trainer):
         if endpoint_loss < self.loss - 1e-12 * max(1., self.loss):
             return Selection(proposal.epoch_id, endpoint, endpoint_loss)
         self.ledger.work["joint_endpoint_conflicts"] += 1
+        # A stall means every endpoint equals the committed features it was
+        # trained from, i.e. no branch accepted a single local step this
+        # window; every cached checkpoint is then that same committed state,
+        # so a menu cannot contain a new combination. The check compares two
+        # arrays the coordinator already holds. Only the gate arm skips the
+        # request; reference arms keep their documented behavior. The skip
+        # forgoes progress only in the unobserved case of a trajectory that
+        # strictly improves and still returns bitwise to its start.
+        if all(np.array_equal(menu.features[-1], self.features[i])
+               for i, menu in enumerate(proposal.menus)):
+            self.ledger.work["stall_conflicts"] += 1
+            if self.gate_menu:
+                return Selection(proposal.epoch_id, tuple(0 for _ in proposal.menus), self.loss)
+        if self.gate_menu:
+            # The restricted candidate set adds no upload: index 0 is the
+            # committed feature the coordinator already holds and index 1 is
+            # the endpoint uploaded with the proposal. The full menu can only
+            # add combinations, so a gate pass trades possible extra loss
+            # reduction for an upload-free conflict repair.
+            restricted = tuple(FeatureMenu((menu.steps[0], menu.steps[-1]),
+                                           (self.features[i], menu.features[-1]),
+                                           (menu.parameter_versions[0], menu.parameter_versions[-1]))
+                               for i, menu in enumerate(proposal.menus))
+
+            def restricted_evaluate(indices):
+                mapped = tuple(0 if index == 0 else len(menu.steps) - 1
+                               for index, menu in zip(indices, proposal.menus))
+                return evaluate(mapped)
+
+            indices, value = select_menu(restricted, restricted_evaluate, self.loss)
+            if value < self.loss - 1e-12 * max(1., self.loss):
+                self.ledger.work["gate_accepted_without_menu"] += 1
+                selected = tuple(0 if index == 0 else len(menu.steps) - 1
+                                 for index, menu in zip(indices, proposal.menus))
+                size = retained_array_bytes(self.fusion, self.batch.targets, self.features,
+                                            tuple(menu.features[-1] for menu in proposal.menus),
+                                            tuple(contributions.values()))
+                self.peak_coordinator_retained = max(self.peak_coordinator_retained, size)
+                return Selection(proposal.epoch_id, selected, value)
+            self.ledger.work["gate_menu_requests"] += 1
         if len(self.menu_steps) > 1:
             extra = len(self.menu_steps) - 1
             self.ledger.transfer("replay_menu_request", 8 * extra * len(self.branches), messages=len(self.branches))
@@ -333,7 +378,9 @@ class ReplayTrainer(Trainer):
 
     def run(self) -> dict:
         result = super().run()
-        result["method"] = "replay_select" if len(self.menu_steps) > 1 else "replay_endpoint"
+        result["method"] = ("replay_endpoint" if len(self.menu_steps) == 1
+                            else "replay_gated" if self.gate_menu else "replay_select")
+        result["gate_menu"] = self.gate_menu
         result["menu_steps"] = list(self.menu_steps)
         result["selected_prefix_counts"] = self.selected_prefix_counts
         result["max_replay_feature_error"] = self.max_replay_feature_error
@@ -351,7 +398,7 @@ def compare(*, seeds: tuple[int, ...] = (17, 31, 47), max_rounds: int = 1000, in
     runs = []
     for seed in seeds:
         batch, branches, fusion = make_problem(seed)
-        variants = ["backprop", "replay_endpoint", "replay_select"]
+        variants = ["backprop", "replay_endpoint", "replay_select", "replay_gated"]
         if include_contract:
             variants.append("compressed")
         for name in variants:
@@ -359,7 +406,8 @@ def compare(*, seeds: tuple[int, ...] = (17, 31, 47), max_rounds: int = 1000, in
             # arm is training. All share immutable initial model objects.
             if name.startswith("replay"):
                 trainer = ReplayTrainer(batch, branches, fusion, config,
-                                        menu_steps=(16,) if name == "replay_endpoint" else None, seed=seed)
+                                        menu_steps=(16,) if name == "replay_endpoint" else None,
+                                        gate_menu=name == "replay_gated", seed=seed)
             else:
                 trainer = Trainer(batch, branches, fusion, config, method=name, seed=seed)
             report = trainer.run()
@@ -370,7 +418,7 @@ def compare(*, seeds: tuple[int, ...] = (17, 31, 47), max_rounds: int = 1000, in
                   f"target={report['target_reached']} bytes={report['ledger']['total_logical_bytes']}", flush=True)
     return {
         "schema_version": 1, "experiment": "exact-boundary-replay-and-prefix-selection",
-        "implementation": "endpoint-first-lazy-menu-v1",
+        "implementation": "endpoint-first-gated-stall-skip-v3",
         "environment": {"python": platform.python_version(), "numpy": np.__version__},
         "config": {f.name: getattr(config, f.name) for f in fields(config)}, "seeds": list(seeds),
         "scope": "same fixed 12-sample regression and 4 branches as M1; single-process honest-node simulation",

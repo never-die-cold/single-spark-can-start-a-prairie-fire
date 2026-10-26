@@ -59,6 +59,8 @@ python -m prairie_fire.replay --rounds 1500 --learning-rate .08 --fusion-learnin
 
 保留原学习率的主对照中，新路线在两个种子达标，相对普通反向传播减少约 84% 和 90% 的逻辑通信；第三个种子未达标。中间步选择的消融未证明它比只发最终候选进一步省通信，节点尾部副本也增加了存储。完整正负结果见 [实验汇总](results/replay-assessment-2026-10-25.json)。
 
+M1.1 新增冲突闸门（`replay_gated`）：联合终点冲突时，协调端先在已免费持有的 `{回滚, 终点}` 组合里做零上传搜索；诊断进一步表明种子 71 的冲突全部是停滞窗口（终点与中间步逐位等于已提交特征），v3 对此直接跳过菜单请求。主对照种子 47 保持达标，通信降到与只发终点完全相同（较未闸门 −5.8%，较反向传播 −90.7%）；种子 71 的菜单浪费清零（−34.8%，诊断）；种子 31 与留出种子 `5, 71, 93` 以更高的最终损失换取字节节省。机制、冲突分类表与反例见 [replay-design.md](docs/replay-design.md) 的 M1.1 小节。
+
 ## 已放入的内容
 
 | 文件 | 内容 |
@@ -71,11 +73,17 @@ python -m prairie_fire.replay --rounds 1500 --learning-rate .08 --fusion-learnin
 | [prairie_fire/contracts.py](prairie_fire/contracts.py) | 压缩响应、尾部界、节点摘要、联合接受、空间扩展和版本检查 |
 | [prairie_fire/experiments.py](prairie_fire/experiments.py) | 固定种子的可复现检查及 JSON 报告 |
 | [prairie_fire/training.py](prairie_fire/training.py) | 固定批次子网络训练、事务提交、契约修复、完整逻辑流量账本及六组对照 |
+| [prairie_fire/replay.py](prairie_fire/replay.py) | 精确边界重放、冲突触发的按需菜单与 M1.1 边际收益闸门 |
 | [prairie_fire/baselines.py](prairie_fire/baselines.py) | 早期磁盘分块/标量同步 XOR 基线 |
 | [tests/test_contracts.py](tests/test_contracts.py) | 性质测试、反例、版本和输入检查 |
 | [tests/test_training.py](tests/test_training.py) | 批量反向传播、参数梯度保持、事务隔离和训练安全检查 |
+| [tests/test_replay.py](tests/test_replay.py) | 重放精确性、按需上传、闸门不变量与联合选步构造例 |
+| [docs/replay-design.md](docs/replay-design.md) | 精确边界重放路线的设计、账本、消融与 M1.1 闸门结果 |
 | [results/reference-2026-10-25.json](results/reference-2026-10-25.json) | 本次完整运行产生的参考结果 |
 | [results/m1-reference-2026-10-25.json](results/m1-reference-2026-10-25.json) | M1 多种子训练与消融结果；独立于原始数学基线 |
+| [results/replay-gated-stall-skip-2026-10-25.json](results/replay-gated-stall-skip-2026-10-25.json) | 主对照加入 v3 闸门臂（含停滞跳过）的完整结果 |
+| [results/replay-gated-stall-skip-heldout-2026-10-25.json](results/replay-gated-stall-skip-heldout-2026-10-25.json) | 留出种子 5/71/93 的 v3 闸门对照；均未达标，仅作诊断 |
+| [results/replay-conflict-taxonomy-2026-10-25.json](results/replay-conflict-taxonomy-2026-10-25.json) | 逐冲突分类诊断：停滞窗口 vs 有节点移动的冲突 |
 
 ## 如何解读结果
 

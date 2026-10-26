@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "experiment": "conflict-taxonomy-diagnostic",
+  "implementation": "oracle-peek-on-replay-select-v1",
+  "environment": {
+    "python": "3.12.10",
+    "numpy": "2.5.1"
+  },
+  "config": {
+    "max_rounds": 1000,
+    "local_steps": 16,
+    "fusion_interval": 2,
+    "target_loss": 0.01,
+    "learning_rate": 0.08,
+    "fusion_learning_rate": 0.04
+  },
+  "seeds": [
+    17,
+    31,
+    47,
+    5,
+    71,
+    93
+  ],
+  "scope": "single-process oracle peek into cached menu contents during ungated replay_select training; classifies each joint-endpoint conflict; wire protocol and ledgers unchanged by this diagnostic",
+  "definitions": {
+    "stall_conflicts": "every endpoint equals the committed features it was trained from (no branch accepted any local step this window)",
+    "stall_with_differing_intermediate": "stall where some cached intermediate checkpoint differs from committed (cycle caveat for skipping)",
+    "single_endpoint_improves": "some single node endpoint alone strictly decreases the true loss"
+  },
+  "runs": [
+    {
+      "seed": 17,
+      "final_loss": 0.009997911152570102,
+      "target_reached": true,
+      "taxonomy": {
+        "no_conflict": 141
+      },
+      "work": {
+        "joint_endpoint_conflicts": 0,
+        "conflict_menu_requests": 0,
+        "accepted_proposals": 141,
+        "rejected_proposals": 0
+      }
+    },
+    {
+      "seed": 31,
+      "final_loss": 0.014005498382229711,
+      "target_reached": false,
+      "taxonomy": {
+        "no_conflict": 611,
+        "conflicts_with_movers": 389,
+        "single_endpoint_improves": 388
+      },
+      "work": {
+        "joint_endpoint_conflicts": 389,
+        "conflict_menu_requests": 389,
+        "accepted_proposals": 999,
+        "rejected_proposals": 1
+      }
+    },
+    {
+      "seed": 47,
+      "final_loss": 0.009989589504992517,
+      "target_reached": true,
+      "taxonomy": {
+        "no_conflict": 428,
+        "conflicts_with_movers": 66,
+        "single_endpoint_improves": 66
+      },
+      "work": {
+        "joint_endpoint_conflicts": 66,
+        "conflict_menu_requests": 66,
+        "accepted_proposals": 494,
+        "rejected_proposals": 0
+      }
+    },
+    {
+      "seed": 5,
+      "final_loss": 0.012523689998580187,
+      "target_reached": false,
+      "taxonomy": {
+        "no_conflict": 880,
+        "conflicts_with_movers": 120,
+        "single_endpoint_improves": 120
+      },
+      "work": {
+        "joint_endpoint_conflicts": 120,
+        "conflict_menu_requests": 120,
+        "accepted_proposals": 1000,
+        "rejected_proposals": 0
+      }
+    },
+    {
+      "seed": 71,
+      "final_loss": 0.03372963106755542,
+      "target_reached": false,
+      "taxonomy": {
+        "no_conflict": 17,
+        "stall_conflicts": 983,
+        "stall_with_differing_intermediate": 0
+      },
+      "work": {
+        "joint_endpoint_conflicts": 983,
+        "conflict_menu_requests": 983,
+        "accepted_proposals": 17,
+        "rejected_proposals": 983
+      }
+    },
+    {
+      "seed": 93,
+      "final_loss": 0.012399099813521143,
+      "target_reached": false,
+      "taxonomy": {
+        "no_conflict": 568,
+        "conflicts_with_movers": 432,
+        "single_endpoint_improves": 432
+      },
+      "work": {
+        "joint_endpoint_conflicts": 432,
+        "conflict_menu_requests": 432,
+        "accepted_proposals": 1000,
+        "rejected_proposals": 0
+      }
+    }
+  ]
+}
