@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "experiment": "seed-71-stall-cause-diagnostic",
+  "environment": {
+    "python": "3.12.10",
+    "numpy": "2.5.1"
+  },
+  "config": {
+    "max_rounds": 1000,
+    "local_steps": 16,
+    "learning_rate": 0.08,
+    "fusion_learning_rate": 0.04,
+    "fusion_interval": 2,
+    "initial_rank": 1,
+    "refresh_period": 4,
+    "max_attempts": 8,
+    "target_loss": 0.01
+  },
+  "constant_prediction_floor": 0.03372963105529551,
+  "dead_relu_death_trace": {
+    "alive_units_per_round_first60": [
+      57,
+      27,
+      12,
+      7,
+      6,
+      5,
+      4,
+      4,
+      2,
+      2,
+      2,
+      1,
+      1,
+      2,
+      1,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "first_all_dead_round": 18,
+    "drops": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      11,
+      14,
+      16,
+      17
+    ]
+  },
+  "sweep": {
+    "scope": "exploratory single-seed (71) lr/window grid, fixed batch and fusion lr .04",
+    "runs": [
+      {
+        "learning_rate": 0.02,
+        "local_steps": 4,
+        "backprop_final_loss": 0.02304720337470319,
+        "replay_gated_final_loss": 0.023567177207257203
+      },
+      {
+        "learning_rate": 0.02,
+        "local_steps": 16,
+        "backprop_final_loss": 0.024057390804892876,
+        "replay_gated_final_loss": 0.025106356455782446
+      },
+      {
+        "learning_rate": 0.02,
+        "local_steps": 64,
+        "backprop_final_loss": 0.03372963106754925,
+        "replay_gated_final_loss": 0.02524233779087358
+      },
+      {
+        "learning_rate": 0.08,
+        "local_steps": 4,
+        "backprop_final_loss": 0.024168560349422604,
+        "replay_gated_final_loss": 0.024987438048024894
+      },
+      {
+        "learning_rate": 0.08,
+        "local_steps": 16,
+        "backprop_final_loss": 0.033729631067550704,
+        "replay_gated_final_loss": 0.03372963106755542
+      },
+      {
+        "learning_rate": 0.08,
+        "local_steps": 64,
+        "backprop_final_loss": 0.0337296310675917,
+        "replay_gated_final_loss": 0.033729631067557164
+      },
+      {
+        "learning_rate": 0.32,
+        "local_steps": 4,
+        "backprop_final_loss": 0.03372963106755521,
+        "replay_gated_final_loss": 0.03372963106755817
+      },
+      {
+        "learning_rate": 0.32,
+        "local_steps": 16,
+        "backprop_final_loss": 0.03372963106759175,
+        "replay_gated_final_loss": 0.03372963106755461
+      },
+      {
+        "learning_rate": 0.32,
+        "local_steps": 64,
+        "backprop_final_loss": 0.03372963106759235,
+        "replay_gated_final_loss": 0.03372963106759202
+      }
+    ]
+  }
+}

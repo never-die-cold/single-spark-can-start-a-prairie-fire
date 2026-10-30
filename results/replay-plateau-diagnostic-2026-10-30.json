@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "experiment": "seed-71-plateau-diagnostic",
+  "environment": {
+    "python": "3.12.10",
+    "numpy": "2.5.1"
+  },
+  "config": {
+    "max_rounds": 1000,
+    "local_steps": 16,
+    "learning_rate": 0.08,
+    "fusion_learning_rate": 0.04,
+    "fusion_interval": 2,
+    "initial_rank": 1,
+    "refresh_period": 4,
+    "max_attempts": 8,
+    "target_loss": 0.01
+  },
+  "seeds": [
+    71,
+    17
+  ],
+  "scope": "single-process diagnostic at the converged plateau; gradient norms and one-step capsule probes; exploratory, not a protocol claim",
+  "runs": [
+    {
+      "seed": 71,
+      "backprop": {
+        "final_loss": 0.033729631067550704,
+        "accepted": 18,
+        "fusion_updates": 297,
+        "accepted_rounds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "feature_grad_norm": 0.0,
+        "fusion_param_grad_norm": 4.950798957691915e-06,
+        "branch_param_grad_norms": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capsule_headroom": null
+      },
+      "replay_gated": {
+        "final_loss": 0.03372963106755542,
+        "accepted": 17,
+        "fusion_updates": 297,
+        "accepted_rounds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "feature_grad_norm": 0.0,
+        "fusion_param_grad_norm": 4.951750736822662e-06,
+        "branch_param_grad_norms": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capsule_headroom": [
+          {
+            "node": 0,
+            "capsule_grad_norm": 0.0,
+            "base_local_loss": 0.03372963106755542,
+            "one_small_step_loss": 0.03372963106755542
+          },
+          {
+            "node": 1,
+            "capsule_grad_norm": 0.0,
+            "base_local_loss": 0.03372963106755542,
+            "one_small_step_loss": 0.03372963106755542
+          },
+          {
+            "node": 2,
+            "capsule_grad_norm": 0.0,
+            "base_local_loss": 0.03372963106755542,
+            "one_small_step_loss": 0.03372963106755542
+          },
+          {
+            "node": 3,
+            "capsule_grad_norm": 0.0,
+            "base_local_loss": 0.03372963106755542,
+            "one_small_step_loss": 0.03372963106755542
+          }
+        ]
+      }
+    },
+    {
+      "seed": 17,
+      "backprop": {
+        "final_loss": 0.009982085040533944,
+        "accepted": 143,
+        "fusion_updates": 71,
+        "accepted_rounds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30
+        ],
+        "feature_grad_norm": 0.015103523391413045,
+        "fusion_param_grad_norm": 0.03717624265369596,
+        "branch_param_grad_norms": [
+          0.003156392971683096,
+          0.0010838265759171705,
+          0.002093390958931267,
+          0.004192061059934604
+        ],
+        "capsule_headroom": null
+      },
+      "replay_gated": {
+        "final_loss": 0.009997911152570102,
+        "accepted": 141,
+        "fusion_updates": 70,
+        "accepted_rounds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30
+        ],
+        "feature_grad_norm": 0.015157957353963926,
+        "fusion_param_grad_norm": 0.0391922177458721,
+        "branch_param_grad_norms": [
+          0.0032686726140931485,
+          0.0012515828829713388,
+          0.002068069100361705,
+          0.0032420210299285183
+        ],
+        "capsule_headroom": [
+          {
+            "node": 0,
+            "capsule_grad_norm": 0.005289208386617446,
+            "base_local_loss": 0.009997911152570102,
+            "one_small_step_loss": 0.009997883176977385
+          },
+          {
+            "node": 1,
+            "capsule_grad_norm": 0.009258770018251294,
+            "base_local_loss": 0.0099979111525701,
+            "one_small_step_loss": 0.009997825428876414
+          },
+          {
+            "node": 2,
+            "capsule_grad_norm": 0.007886365138497017,
+            "base_local_loss": 0.009997911152570102,
+            "one_small_step_loss": 0.009997848958095804
+          },
+          {
+            "node": 3,
+            "capsule_grad_norm": 0.007339507370318155,
+            "base_local_loss": 0.009997911152570102,
+            "one_small_step_loss": 0.009997857284444932
+          }
+        ]
+      }
+    }
+  ]
+}
